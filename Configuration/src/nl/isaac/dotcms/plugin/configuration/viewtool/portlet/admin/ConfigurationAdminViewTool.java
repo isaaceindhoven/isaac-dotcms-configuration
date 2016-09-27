@@ -13,8 +13,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import nl.isaac.comp.configuration.CustomConfiguration;
 import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
-import nl.isaac.dotcms.plugin.configuration.dependencies.nl.isaac.comp.configuration.CustomConfiguration;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
 
 import org.apache.velocity.tools.view.tools.ViewTool;
