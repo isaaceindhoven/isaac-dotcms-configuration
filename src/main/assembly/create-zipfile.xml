@@ -11,11 +11,11 @@
 
 	<fileSets>
 		<fileSet>
-			<directory>/src/main/java/</directory>
+			<directory>${basedir}/src/main/java/</directory>
 			<outputDirectory>/${artifactId}/src/</outputDirectory>
 		</fileSet>
 		<fileSet>
-			<directory>/src/main/resources/</directory>
+			<directory>${basedir}/src/main/resources/</directory>
 			<outputDirectory>/${artifactId}/</outputDirectory>
 			<filtered>true</filtered>
 		</fileSet>
