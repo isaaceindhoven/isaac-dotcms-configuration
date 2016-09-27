@@ -1,3 +1,0 @@
-<project name="configuration" default="build">
-	<import file="../common.xml"/>
-</project>

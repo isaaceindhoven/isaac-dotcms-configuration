@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<!-- Standard for all configurations! Same as config.xml -->
+	<xml fileName="${sys:catalina.home}/conf/applications/serverConfig.xml" />
+
+	<xml fileName="${sys:catalina.home}/conf/applications/${param:hostName}/${param:pluginName}/${param:ClientIPAddress}/pluginConfig.xml" optional="true" />
+	<properties fileName="${sys:catalina.home}/conf/applications/${param:hostName}/${param:pluginName}/${param:ClientIPAddress}/plugin.properties" optional="true"/>
+	
+	<xml fileName="${sys:catalina.home}/conf/applications/${param:hostName}/${param:pluginName}/pluginConfig.xml" optional="true" />
+	<properties fileName="${sys:catalina.home}/conf/applications/${param:hostName}/${param:pluginName}/plugin.properties" optional="true"/>
+	
+	<dotcms fileName="/config/${param:pluginName}/pluginConfig.xml" optional="true" />
+	
+	<!-- Because our class DotCMSFileConfiguration extends from XMLConfiguration, 
+		 we can only use XML configfiles within the dotCMS file structure -->
+	<!-- dotcms fileName="/config/${param:pluginName}/plugin.properties" optional="true"/ -->
+	
+	<xml fileName="${sys:catalina.home}/conf/applications/${param:pluginName}/pluginConfig.xml" optional="true" />
+	<properties fileName="${sys:catalina.home}/conf/applications/${param:pluginName}/plugin.properties" optional="true"/>
+	
+	<!--  Indien een plugin gebruik maakt van de configuratie plugin dan MOET een van onderstaande bestanden bestaan -->
+	<xml fileName="${sys:catalina.home}/../plugins/${param:pluginName}/conf/pluginConfig.xml" optional="true"/>
+	<properties fileName="${sys:catalina.home}/../plugins/${param:pluginName}/conf/plugin.properties" optional="true"/>
+	
+	<!--   -->
+	<osgi fileName="/conf/plugin.properties" optional="true"/>
+</configuration>
