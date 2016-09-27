@@ -91,6 +91,15 @@ public class ConfigurationAdminViewTool implements ViewTool {
 		}
 	}
 
+	/**
+	 * This determines the number of loaded configuration variants.
+	 * 
+	 * @return
+	 */
+	public int getNumberOfLoadedConfigurations() {
+		return ConfigurationService.getNumberOfLoadedConfigurations();
+	}
+
 	@Override
 	public void init(Object arg0) {
 	}

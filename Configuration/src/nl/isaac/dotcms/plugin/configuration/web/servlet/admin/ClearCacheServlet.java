@@ -18,7 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import nl.isaac.dotcms.plugin.configuration.ConfigurationDotCMSCacheGroupHandler;
 import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
 
+import com.dotmarketing.business.web.WebAPILocator;
+import com.dotmarketing.exception.DotRuntimeException;
 import com.dotmarketing.util.Logger;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 
 /**
  * A simple servlet that calls {@link ConfigurationService#clearCache()} and redirects to a specific <code>returnAddress</code>
@@ -29,6 +33,19 @@ import com.dotmarketing.util.Logger;
 public class ClearCacheServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			if (!WebAPILocator.getUserWebAPI().isLoggedToBackend(req)) {
+				resp.sendError(404);
+				return;
+			}
+		} catch (DotRuntimeException e) {
+			throw new ServletException(e);
+		} catch (PortalException e) {
+			throw new ServletException(e);
+		} catch (SystemException e) {
+			throw new ServletException(e);
+		}
+
 		ConfigurationService.clearCache();
 		ConfigurationDotCMSCacheGroupHandler.clearCache();
 

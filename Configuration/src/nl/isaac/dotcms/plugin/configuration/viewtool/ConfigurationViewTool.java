@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import nl.isaac.comp.configuration.CustomConfiguration;
 import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.filter.RequestStoringFilter;
+import nl.isaac.dotcms.plugin.configuration.listener.RequestStoringListener;
 import nl.isaac.dotcms.plugin.configuration.util.BasicMap;
 
 import org.apache.velocity.tools.view.context.ViewContext;
@@ -30,7 +30,7 @@ import com.dotmarketing.util.Logger;
 
 /**
  * This view tool will always use {@link ConfigurationService#getHostConfiguration()} for host configuration and {@link ConfigurationService#getPluginConfiguration(String)} for plugin configurations.
- * So ensure that something like {@link RequestStoringFilter} is deployed!
+ * So ensure that something like {@link RequestStoringListener} is deployed!
  *
  * @author maarten
  *

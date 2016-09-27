@@ -18,7 +18,10 @@
 	<xml fileName="${sys:catalina.home}/conf/applications/${param:pluginName}/pluginConfig.xml" optional="true" />
 	<properties fileName="${sys:catalina.home}/conf/applications/${param:pluginName}/plugin.properties" optional="true"/>
 	
-  <!--  Indien een plugin gebruik makt van de configuratie plugin dan MOET een van onderstaande bestanden bestaan -->
+	<!--  Indien een plugin gebruik maakt van de configuratie plugin dan MOET een van onderstaande bestanden bestaan -->
 	<xml fileName="${sys:catalina.home}/../plugins/${param:pluginName}/conf/pluginConfig.xml" optional="true"/>
 	<properties fileName="${sys:catalina.home}/../plugins/${param:pluginName}/conf/plugin.properties" optional="true"/>
+	
+	<!--  Default osgi plugin.properties location when putting the plugin.properties in the resources/ext folder -->
+	<properties fileName="${sys:catalina.home}/webapps/ROOT/WEB-INF/velocity/osgi/${param:osgiJarName}/ext/plugin.properties" optional="true"/>	
 </configuration>

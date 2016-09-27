@@ -9,20 +9,22 @@ package nl.isaac.dotcms.plugin.configuration;
 */
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import nl.isaac.comp.configuration.CustomConfiguration;
 import nl.isaac.comp.configuration.types.EnvironmentType;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
+import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.FileConfiguration;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.lang.text.StrLookup;
 import nl.isaac.dotcms.plugin.configuration.dotcms.DotCMSFileConfigurationProvider;
 import nl.isaac.dotcms.plugin.configuration.exception.ConfigurationNotFoundException;
+import nl.isaac.dotcms.plugin.configuration.listener.RequestStoringListener;
 import nl.isaac.dotcms.plugin.configuration.util.EmptyConfiguration;
 
-import com.dotmarketing.business.APILocator;
-import com.dotmarketing.exception.DotDataException;
 import com.dotmarketing.util.Logger;
 
 /**
@@ -53,6 +55,7 @@ public class ConfigurationService {
 	private static final String locationConfigPlugins = "${sys:catalina.home}/conf/applications/locationConfigPlugins.xml";
 
 	private static final ConcurrentHashMap<String, CustomConfiguration> serverCache = new ConcurrentHashMap<String, CustomConfiguration>();
+	private static final Set<String> ipForwardCache = new HashSet<String>();
 
 	/**
 	 * The type of environment
@@ -104,7 +107,6 @@ public class ConfigurationService {
 	 * @throws ConfigurationException
 	 */
 	public static CustomConfiguration getPluginConfiguration(String pluginName) throws ConfigurationException, ConfigurationNotFoundException {
-		validatePluginName(pluginName);
 		return retrieveFromCacheOrCreateConfiguration("plugin_" + pluginName + '_', pluginName, locationConfigPlugins);
 	}
 	/**
@@ -161,7 +163,6 @@ public class ConfigurationService {
 	 * @throws ConfigurationException
 	 */
 	public static CustomConfiguration getPluginConfiguration(String pluginName, String hostName, String ipAddress, String sessionId) throws ConfigurationException {
-		validatePluginName(pluginName);
 		return retrieveFromCacheOrCreateConfiguration("plugin_" + pluginName + '_', hostName, ipAddress, sessionId, pluginName, locationConfigPlugins);
 	}
 	/**
@@ -182,7 +183,8 @@ public class ConfigurationService {
 			ConfigurationDotCMSCacheGroupHandler.setLoaded();
 		}
 
-		String key = keyPrefix + hostName;
+		String key;
+		final String basicKey = keyPrefix + hostName;
 
 		// On Windows the : character is not allowed, replace it with _
 		if (ipAddress != null) {
@@ -190,7 +192,14 @@ public class ConfigurationService {
 		}
 
 		if (cacheOnIp) {
-			key += '_' + ipAddress + '_' + sessionId;
+			String ipKey = basicKey + '_' + ipAddress + '_' + sessionId;
+			if (!ipForwardCache.contains(ipKey)) {
+				key = ipKey;
+			} else {
+				key = basicKey;
+			}
+		} else {
+			key = basicKey;
 		}
 
 		Logger.debug(ConfigurationService.class, "Looking up configuration under key: " + key);
@@ -206,11 +215,20 @@ public class ConfigurationService {
 
 		interpolationValues.put("hostName", hostName);
 		if (pluginName != null) {
-			interpolationValues.put("pluginName", pluginName);
+			if(pluginName.startsWith("osgi/")) {
+				//This is an OSGi plugin
+				String[] splitPluginName = pluginName.split("/");
+				interpolationValues.put("pluginName", splitPluginName[1]);
+				if(splitPluginName.length > 2) {
+					interpolationValues.put("osgiJarName", splitPluginName[2]);
+				}
+			} else {
+				interpolationValues.put("pluginName", pluginName);
+			}
 		}
 
 		// We only do ip specific things on DEV (and local of course!)
-		if (cacheOnIp) {
+		if (cacheOnIp && ipAddress != null) {
 			interpolationValues.put("ClientIPAddress", ipAddress);
 		}
 
@@ -222,27 +240,39 @@ public class ConfigurationService {
 		providers.put("dotcms", dotCmsProvider);
 
 		conf = ConfigurationFactory.createConfiguration(key, configurationLocation, interpolators, providers);
-		ConfigurationParameters params = defaultParameters.get();
-		if (params != null) {
-			params.addConfigurationToSession(key);
+
+		boolean isIpSpecific = false;
+		if (cacheOnIp && ipAddress != null) {
+			for (FileConfiguration fileConf : conf.getLoadedFileConfigurations()) {
+				if (fileConf.getFileName() != null && fileConf.getFileName().contains(ipAddress)) {
+
+					isIpSpecific = true;
+
+					return conf;
+				}
+			}
+		}
+		if (isIpSpecific) {
+			ConfigurationParameters params = defaultParameters.get();
+			if (params != null) {
+				params.addConfigurationToSession(key);
+			}
+		}
+		if (cacheOnIp && !isIpSpecific) {
+			ipForwardCache.add(key);
+			if (serverCache.contains(basicKey)) {
+				return serverCache.get(basicKey);
+			} else {
+				key = basicKey;
+			}
 		}
 		Logger.debug(ConfigurationService.class, "Created a new configuration! " + key);
+
 		serverCache.put(key, conf);
 
 		return conf;
 	}
 
-	private static void validatePluginName(String pluginName) {
-		// First check if this plugin exists!
-		try {
-			if (null == APILocator.getPluginAPI().loadPlugin(pluginName)) {
-				throw new DotDataException("DotCMS does not know a plugin by the name: '" + pluginName + "'");
-			}
-		} catch (DotDataException e) {
-			throw new IllegalArgumentException("DotCMS does not know a plugin by the name: '" + pluginName + "'", e);
-		}
-
-	}
 	/**
 	 * This is, effectively, a tuple, being able to return the required parameters needed to construct a key.
 	 * It also contains a hook to whatever system is outside of this class to register a configuration object (or at least it's key) so that the outside system can clean up when it's no-longer needed.
@@ -273,6 +303,12 @@ public class ConfigurationService {
 		defaultParameters.remove();
 	}
 	/**
+	 * Method to be used by {@link RequestStoringListener} to stack the parameters in nested requests
+	 */
+	public static final ConfigurationParameters getDefaultParameters() {
+		return defaultParameters.get();
+	}
+	/**
 	 * This will invalidate a specifically cached configuration.
 	 * @param key
 	 */
@@ -285,5 +321,15 @@ public class ConfigurationService {
 	 */
 	public static final void clearCache() {
 		serverCache.clear();
+		ipForwardCache.clear();
+	}
+
+	/**
+	 * This determines the number of loaded configuration variants.
+	 * 
+	 * @return
+	 */
+	public static int getNumberOfLoadedConfigurations() {
+		return serverCache.size();
 	}
 }

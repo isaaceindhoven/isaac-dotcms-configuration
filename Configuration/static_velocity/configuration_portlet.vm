@@ -19,6 +19,9 @@
 				<div>
 					Flushing the cache will clear out all host and plugin configurations currently being held in memory. This will not refresh the environment type!
 				</div>
+				<div>
+					There are currently $configurationAdmin.numberOfLoadedConfigurations
+				</div>
 			</td>
 		</tr>
 
@@ -43,7 +46,7 @@
 					<select name="pluginName">
 					  <option value="">All Plugins</option>
 					  #foreach($pluginName in $configurationAdmin.getAllPlugins($host.hostName, $request))
-						<option value="$pluginName" #if($pluginName.equals($pluginParam))selected="selected#end">$pluginName</option>
+						<option value="$pluginName" #if($pluginName.equals($pluginParam))selected="selected"#end>$pluginName</option>
 					  #end
 					</select>
 					<button dojoType="dijit.form.Button" type="submit" value="Change" iconClass="resetIcon">
@@ -72,9 +75,7 @@
 				<div>No Host configuration found.</div>
 			#else
 				<div>
-					<pre>
-						${configurationAdmin.printConfiguration($hostConfiguration)}
-					</pre>
+					<pre>${configurationAdmin.printConfiguration($hostConfiguration)}</pre>
 				</div>
 			#end
 			<table class="listingTable shadowBox">
@@ -95,9 +96,7 @@
 							<td>$pluginName</td>
 							<td>
 								<div>
-									<pre>
-										${configurationAdmin.printConfiguration($pluginConfiguration)}
-									</pre>
+									<pre>${configurationAdmin.printConfiguration($pluginConfiguration)}</pre>
 							</td>
 						</tr>
 							#end

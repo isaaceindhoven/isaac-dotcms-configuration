@@ -5,8 +5,6 @@ import java.util.Stack;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.ConfigurationNode;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.ConfigurationNodeVisitor;
 
-
-
 public class ToStringMultiLineVisitor implements ConfigurationNodeVisitor {
 
 	private Stack<String> parentStack = new Stack<String>();
@@ -22,16 +20,16 @@ public class ToStringMultiLineVisitor implements ConfigurationNodeVisitor {
 			parentStack.add(node.getName());
 
 			if (node.getChildrenCount() == 0) {
-				buf.append("\n");
+				if (buf.length() > 0) {
+					buf.append("\n");
+				}
 
 				for (int i = 0; i < parentStack.size() - 1; i++) {
 					buf.append(parentStack.get(i)).append(".");
 				}
-			}
 
-			buf.append(parentStack.peek());
+				buf.append(parentStack.peek());
 
-			if (node.getChildrenCount() == 0) {
 				buf.append(" = ").append(node.getValue());
 			}
 		}

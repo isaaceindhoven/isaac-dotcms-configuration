@@ -1,4 +1,4 @@
-package nl.isaac.dotcms.plugin.configuration.filter;
+package nl.isaac.dotcms.plugin.configuration.listener;
 /**
 * dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed 
 * under a Creative Commons Attribution 3.0 Unported License

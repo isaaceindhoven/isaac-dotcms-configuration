@@ -1,4 +1,4 @@
-package nl.isaac.dotcms.plugin.configuration.filter;
+package nl.isaac.dotcms.plugin.configuration.listener;
 /**
 * dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed 
 * under a Creative Commons Attribution 3.0 Unported License
@@ -13,6 +13,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
+import nl.isaac.dotcms.plugin.configuration.ConfigurationService.ConfigurationParameters;
 
 import com.dotmarketing.business.web.WebAPILocator;
 import com.dotmarketing.exception.DotDataException;
@@ -28,8 +29,13 @@ import com.liferay.portal.SystemException;
 public class RequestBasedConfigurationParameters implements ConfigurationService.ConfigurationParameters {
 
 	private final HttpServletRequest request;
-	public RequestBasedConfigurationParameters(HttpServletRequest request) {
+	private final ConfigurationParameters previous;
+	public RequestBasedConfigurationParameters(HttpServletRequest request, ConfigurationService.ConfigurationParameters previous) {
 		this.request = request;
+		this.previous = previous;
+	}
+	public ConfigurationParameters getPrevious() {
+		return previous;
 	}
 
 	@Override

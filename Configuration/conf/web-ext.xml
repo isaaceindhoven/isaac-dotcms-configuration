@@ -1,18 +1,8 @@
-	<filter>
-		<filter-name>ConfigurationRequestStoringFilter</filter-name>
-		<filter-class>nl.isaac.dotcms.plugin.configuration.filter.RequestStoringFilter</filter-class>
-	</filter>
-
-	<filter-mapping>
-		<filter-name>ConfigurationRequestStoringFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>ERROR</dispatcher>
-	</filter-mapping>
-
 	<listener>
-		<listener-class>nl.isaac.dotcms.plugin.configuration.filter.SessionListener</listener-class>
+		<listener-class>nl.isaac.dotcms.plugin.configuration.listener.RequestStoringListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>nl.isaac.dotcms.plugin.configuration.listener.SessionListener</listener-class>
 	</listener>
 
 	<servlet>
