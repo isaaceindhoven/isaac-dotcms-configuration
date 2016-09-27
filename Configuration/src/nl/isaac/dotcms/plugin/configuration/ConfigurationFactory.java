@@ -11,8 +11,8 @@ package nl.isaac.dotcms.plugin.configuration;
 import java.util.Collections;
 import java.util.Map;
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.nl.isaac.comp.configuration.CustomConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.nl.isaac.comp.configuration.CustomConfigurationBuilder;
+import nl.isaac.comp.configuration.CustomConfiguration;
+import nl.isaac.comp.configuration.CustomConfigurationBuilder;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.FileConfiguration;

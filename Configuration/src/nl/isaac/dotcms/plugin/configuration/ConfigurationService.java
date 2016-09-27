@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.nl.isaac.comp.configuration.CustomConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.nl.isaac.comp.configuration.types.EnvironmentType;
+import nl.isaac.comp.configuration.CustomConfiguration;
+import nl.isaac.comp.configuration.types.EnvironmentType;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.lang.text.StrLookup;

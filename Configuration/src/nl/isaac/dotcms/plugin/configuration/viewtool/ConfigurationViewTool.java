@@ -17,8 +17,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import nl.isaac.comp.configuration.CustomConfiguration;
 import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
-import nl.isaac.dotcms.plugin.configuration.dependencies.nl.isaac.comp.configuration.CustomConfiguration;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
 import nl.isaac.dotcms.plugin.configuration.filter.RequestStoringFilter;
 import nl.isaac.dotcms.plugin.configuration.util.BasicMap;
