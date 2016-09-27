@@ -10,7 +10,7 @@ package nl.isaac.dotcms.plugin.configuration.viewtool;
 
 import java.util.Iterator;
 
-import nl.isaac.comp.configuration.CustomConfiguration;
+import nl.isaac.dotcms.plugin.configuration.dependencies.nl.isaac.comp.configuration.CustomConfiguration;
 import nl.isaac.dotcms.plugin.configuration.util.BasicMap;
 
 import com.dotmarketing.util.Logger;

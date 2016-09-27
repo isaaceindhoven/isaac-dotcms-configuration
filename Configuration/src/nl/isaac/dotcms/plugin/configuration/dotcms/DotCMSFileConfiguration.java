@@ -8,17 +8,15 @@ package nl.isaac.dotcms.plugin.configuration.dotcms;
 * @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
 */
 
-import java.io.IOException;
-
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
 import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.XMLConfiguration;
+import nl.isaac.dotcms.plugin.configuration.shared.FileTools;
 
 import com.dotmarketing.beans.Host;
 import com.dotmarketing.business.APILocator;
 import com.dotmarketing.exception.DotDataException;
 import com.dotmarketing.exception.DotSecurityException;
-import com.dotmarketing.portlets.files.factories.FileFactory;
-import com.dotmarketing.portlets.files.model.File;
+import com.dotmarketing.portlets.fileassets.business.FileAsset;
 import com.liferay.portal.model.User;
 
 /**
@@ -53,13 +51,8 @@ public class DotCMSFileConfiguration extends XMLConfiguration {
 		} catch (DotSecurityException e) {
 			throw new ConfigurationException(e);
 		}
-		File file = FileFactory.getFileByURI(fileName, host, true);
-		try {
-			java.io.File ioFile = APILocator.getFileAPI().getAssetIOFile(file);
-			load(ioFile);
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new ConfigurationException(e);
-		}
+		FileAsset file = FileTools.getFileAssetByURI(fileName, host, true);
+		java.io.File ioFile = file.getFileAsset();
+		load(ioFile);
 	}
 }
