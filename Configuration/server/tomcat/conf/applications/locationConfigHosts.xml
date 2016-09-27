@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<!-- Standard for all configurations! Same as config.xml -->
+	<xml fileName="${sys:catalina.home}/conf/applications/serverConfig.xml" />
+
+	<xml fileName="${sys:catalina.home}/conf/applications/${param:hostName}/${param:ClientIPAddress}/hostConfig.xml" optional="true" />
+	<xml fileName="${sys:catalina.home}/conf/applications/${param:hostName}/hostConfig.xml" optional="true" />
+	<dotcms fileName="/config/hostConfig.xml" optional="true" />
+</configuration>

@@ -1,0 +1,112 @@
+<table class="listingTable shadowBox">
+	<thead>
+		<tr>
+			<th>Configuration Cache</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>Flush cache</th>
+		</tr>
+		<tr>
+			<td>
+				<form method="POST" action="/servlets/configurationcache/clear/">
+					<button dojoType="dijit.form.Button" type="submit" value="Flush" iconClass="resetIcon">
+						Flush
+					</button>
+					<input type="hidden" name="returnAddress" value="/c/portal/layout?${request.queryString}" />
+				</form>
+				<div>
+					Flushing the cache will clear out all host and plugin configurations currently being held in memory. This will not refresh the environment type!
+				</div>
+			</td>
+		</tr>
+
+		#set($allHosts = $configurationAdmin.getAllHosts())
+        #set($hostParam = $request.getParameter('hostName'))
+        #if(!$UtilMethods.isSet($hostParam))
+          #set($hostParam = $host.hostName)
+        #end
+        #set($pluginParam = $request.getParameter('pluginName'))
+		<tr>
+			<th>Select Host and Plugin</th>
+		</tr>
+		<tr>
+			<td>
+				<form method="POST" action="/c/portal/layout?${request.queryString}">
+					<select name="hostName">
+					  <option value="all_hosts"#if($hostParam == "all_hosts")selected="selected"#end>All Hosts</option>
+					  #foreach($hostName in $allHosts)
+						<option value="$hostName" #if($hostName.equals($hostParam))selected="selected"#end>$hostName</option>
+					  #end
+					</select>
+					<select name="pluginName">
+					  <option value="">All Plugins</option>
+					  #foreach($pluginName in $configurationAdmin.getAllPlugins($host.hostName, $request))
+						<option value="$pluginName" #if($pluginName.equals($pluginParam))selected="selected#end">$pluginName</option>
+					  #end
+					</select>
+					<button dojoType="dijit.form.Button" type="submit" value="Change" iconClass="resetIcon">
+						Change
+					</button>
+				</form>
+				<div>
+					You can select a specific host and/or plugin, or you can view the entire configuration.
+				</div>
+			</td>
+		</tr>
+		#if($UtilMethods.isSet($hostParam) && !($hostParam == 'all_hosts'))
+		  #set($hosts = $hostParam.split(','))
+		#else
+		  #set($hosts = $allHosts)
+		#end
+        
+		#foreach($hostName in $hosts)
+		<tr>
+			<th>$hostName</th>
+		</tr>
+		<tr>
+			<td>
+			#set($hostConfiguration = $configurationAdmin.tryGetHostConfiguration($hostName, $request))
+			#if (!$hostConfiguration)
+				<div>No Host configuration found.</div>
+			#else
+				<div>
+					<pre>
+						${configurationAdmin.printConfiguration($hostConfiguration)}
+					</pre>
+				</div>
+			#end
+			<table class="listingTable shadowBox">
+				<tbody>
+				    #if($UtilMethods.isSet($pluginParam))
+						#set($plugins = $pluginParam.split(','))
+				    #else
+						#set($plugins = $configurationAdmin.getAllPlugins($hostName, $request))
+				    #end
+					#if (!$list.isEmpty($plugins))
+						<tr>
+							<th>Plugin Name</th><th>Configuration</th>
+						</tr>
+						#foreach($pluginName in $plugins)
+							#set($pluginConfiguration = $configurationAdmin.tryGetPluginConfiguration($hostName, $pluginName, $request))
+							#if ($pluginConfiguration)
+						<tr>
+							<td>$pluginName</td>
+							<td>
+								<div>
+									<pre>
+										${configurationAdmin.printConfiguration($pluginConfiguration)}
+									</pre>
+							</td>
+						</tr>
+							#end
+						#end
+					#end
+				</tbody>
+			</table>
+			</td>
+		</tr>
+		#end
+	</tbody>
+</table>

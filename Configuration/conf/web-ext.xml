@@ -1,0 +1,25 @@
+	<filter>
+		<filter-name>ConfigurationRequestStoringFilter</filter-name>
+		<filter-class>nl.isaac.dotcms.plugin.configuration.filter.RequestStoringFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ConfigurationRequestStoringFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>nl.isaac.dotcms.plugin.configuration.filter.SessionListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>ConfigurationAdminClear</servlet-name>
+		<servlet-class>nl.isaac.dotcms.plugin.configuration.web.servlet.admin.ClearCacheServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ConfigurationAdminClear</servlet-name>
+		<url-pattern>/servlets/configurationcache/clear/</url-pattern>
+	</servlet-mapping>

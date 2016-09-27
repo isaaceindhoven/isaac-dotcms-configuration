@@ -1,0 +1,12 @@
+	<tool>
+		<key>configuration</key>
+		<scope>request</scope>
+		<class>nl.isaac.dotcms.plugin.configuration.viewtool.ConfigurationViewTool</class>
+	</tool>
+
+	<tool>
+		<key>configurationAdmin</key>
+		<scope>application</scope>
+		<class>nl.isaac.dotcms.plugin.configuration.viewtool.portlet.admin.ConfigurationAdminViewTool</class>
+	</tool>
+	

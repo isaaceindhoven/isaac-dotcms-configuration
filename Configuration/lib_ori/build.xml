@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_dependency_libs" name="Create Jar for Project Minify plugin">
+    <target name="create_dependency_libs">
+        <taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpath="jarjar-1.0.jar"/>
+        <jarjar destfile="../lib/commons-configuration-1.7_dependency.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <zipfileset excludes="META-INF/*.SF" src="commons-configuration-1.7.jar"/>
+            <rule pattern="org.apache.**" result="nl.isaac.dotcms.plugin.configuration.dependencies.@0" />
+        </jarjar>
+        <jarjar destfile="../lib/commons-logging-1.1.1_dependency.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <zipfileset excludes="META-INF/*.SF" src="commons-logging-1.1.1.jar"/>
+            <rule pattern="org.apache.**" result="nl.isaac.dotcms.plugin.configuration.dependencies.@0" />
+        </jarjar>
+        <jarjar destfile="../lib/commons-lang-2.6_dependency.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <zipfileset excludes="META-INF/*.SF" src="commons-lang-2.6.jar"/>
+            <rule pattern="org.apache.**" result="nl.isaac.dotcms.plugin.configuration.dependencies.@0" />
+        </jarjar>
+        <jarjar destfile="../lib/commons-collections-3.2.1_dependency.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <zipfileset excludes="META-INF/*.SF" src="commons-collections-3.2.1.jar"/>
+            <rule pattern="org.apache.**" result="nl.isaac.dotcms.plugin.configuration.dependencies.@0" />
+        </jarjar>
+        <jarjar destfile="../lib/commons-beanutils-1.7.0_dependency.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <zipfileset excludes="META-INF/*.SF" src="commons-beanutils-1.7.0.jar"/>
+            <rule pattern="org.apache.**" result="nl.isaac.dotcms.plugin.configuration.dependencies.@0" />
+        </jarjar>
+        <jarjar destfile="../lib/commons-beanutils-core-1.8.0_dependency.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <zipfileset excludes="META-INF/*.SF" src="commons-beanutils-core-1.8.0.jar"/>
+            <rule pattern="org.apache.**" result="nl.isaac.dotcms.plugin.configuration.dependencies.@0" />
+        </jarjar>
+        <jarjar destfile="../lib/isaac-configuration-1.0.10-SNAPSHOT_dependency.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <zipfileset excludes="META-INF/*.SF" src="isaac-configuration-1.0.10-SNAPSHOT.jar"/>
+            <rule pattern="nl.isaac.**" result="nl.isaac.dotcms.plugin.configuration.dependencies.@0" />
+            <rule pattern="org.apache.**" result="nl.isaac.dotcms.plugin.configuration.dependencies.@0" />
+        </jarjar>
+    </target>
+</project>
