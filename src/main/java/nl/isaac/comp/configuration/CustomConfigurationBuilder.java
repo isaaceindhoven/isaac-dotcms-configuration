@@ -4,22 +4,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import nl.isaac.comp.configuration.interpolator.EnvironmentLookup;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.AbstractConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.CombinedConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.Configuration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.event.ConfigurationErrorEvent;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.event.ConfigurationErrorListener;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.interpol.ConfigurationInterpolator;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.logging.LogFactory;
+import org.apache.commons.configuration.AbstractConfiguration;
+import org.apache.commons.configuration.CombinedConfiguration;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.DefaultConfigurationBuilder;
+import org.apache.commons.configuration.event.ConfigurationErrorEvent;
+import org.apache.commons.configuration.event.ConfigurationErrorListener;
+import org.apache.commons.configuration.interpol.ConfigurationInterpolator;
+import org.apache.commons.logging.LogFactory;
 
 import com.dotmarketing.util.Logger;
 
-
-
-
+import nl.isaac.comp.configuration.interpolator.EnvironmentLookup;
 
 /**
  * Wrapper for DefaultConfigurationBuilder for the Apache Commons Configuration framework. The only reason is to

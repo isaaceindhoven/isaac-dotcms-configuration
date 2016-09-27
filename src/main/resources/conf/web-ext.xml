@@ -13,3 +13,12 @@
 		<servlet-name>ConfigurationAdminClear</servlet-name>
 		<url-pattern>/servlets/configurationcache/clear/</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Monitoring</servlet-name>
+		<servlet-class>nl.isaac.dotcms.util.osgi.MonitoringServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Monitoring</servlet-name>
+		<url-pattern>/app/servlets/monitoring/${project.artifactId}</url-pattern>
+	</servlet-mapping>

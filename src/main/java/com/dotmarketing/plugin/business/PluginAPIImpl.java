@@ -13,14 +13,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import nl.isaac.comp.configuration.CustomConfiguration;
-import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.exception.ConfigurationNotFoundException;
+import org.apache.commons.configuration.ConfigurationException;
 
 import com.dotmarketing.exception.DotDataException;
 import com.dotmarketing.util.Logger;
 import com.dotmarketing.util.UtilMethods;
+
+import nl.isaac.comp.configuration.CustomConfiguration;
+import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
+import nl.isaac.dotcms.plugin.configuration.exception.ConfigurationNotFoundException;
 
 public class PluginAPIImpl extends PluginAPIImplDotCMS {
 	@Override

@@ -2,8 +2,8 @@ package nl.isaac.comp.configuration.visitor;
 
 import java.util.Stack;
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.ConfigurationNode;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.ConfigurationNodeVisitor;
+import org.apache.commons.configuration.tree.ConfigurationNode;
+import org.apache.commons.configuration.tree.ConfigurationNodeVisitor;
 
 public class ToStringMultiLineVisitor implements ConfigurationNodeVisitor {
 

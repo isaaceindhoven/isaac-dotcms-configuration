@@ -4,7 +4,7 @@
 	<portlet-class>com.liferay.portlet.VelocityPortlet</portlet-class>
 	<init-param>
 			<name>view-template</name>
-			<value>/static/plugins/configuration/configuration_portlet.vm</value>
+			<value>/static/plugins/isaac-dotcms-configuration/configuration_portlet.vm</value>
 	</init-param>
 	<expiration-cache>0</expiration-cache>
 	<supports>

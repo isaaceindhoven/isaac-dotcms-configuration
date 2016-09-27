@@ -2,8 +2,9 @@ package nl.isaac.dotcms.plugin.configuration.viewtool;
 
 import java.util.Map;
 
+import org.apache.commons.configuration.ConfigurationException;
+
 import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
 import nl.isaac.dotcms.plugin.configuration.util.BasicMap;
 
 /**

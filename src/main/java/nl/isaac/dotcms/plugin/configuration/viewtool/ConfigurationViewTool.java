@@ -15,16 +15,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nl.isaac.comp.configuration.CustomConfiguration;
-import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.listener.RequestStoringListener;
-import nl.isaac.dotcms.plugin.configuration.util.BasicMap;
-
+import org.apache.commons.configuration.ConfigurationException;
 import org.apache.velocity.tools.view.context.ViewContext;
 import org.apache.velocity.tools.view.tools.ViewTool;
 
 import com.dotmarketing.util.Logger;
+
+import nl.isaac.comp.configuration.CustomConfiguration;
+import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
+import nl.isaac.dotcms.plugin.configuration.listener.RequestStoringListener;
+import nl.isaac.dotcms.plugin.configuration.util.BasicMap;
 
 /**
  * This view tool will always use {@link ConfigurationService#getHostConfiguration()} for host configuration and {@link ConfigurationService#getPluginConfiguration(String)} for plugin configurations.

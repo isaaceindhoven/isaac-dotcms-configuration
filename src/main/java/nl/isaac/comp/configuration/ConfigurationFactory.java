@@ -1,11 +1,12 @@
 package nl.isaac.comp.configuration;
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.AbstractConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.CombinedConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.FileConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.lang.exception.ExceptionUtils;
 
+
+import org.apache.commons.configuration.AbstractConfiguration;
+import org.apache.commons.configuration.CombinedConfiguration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.FileConfiguration;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.xml.sax.SAXParseException;
 
 import com.dotmarketing.util.Logger;

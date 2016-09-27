@@ -11,15 +11,16 @@ package nl.isaac.dotcms.plugin.configuration;
 import java.util.Collections;
 import java.util.Map;
 
-import nl.isaac.comp.configuration.CustomConfiguration;
-import nl.isaac.comp.configuration.CustomConfigurationBuilder;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.FileConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.PropertyConverter;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.lang.text.StrLookup;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
+import org.apache.commons.configuration.FileConfiguration;
+import org.apache.commons.configuration.PropertyConverter;
+import org.apache.commons.lang.text.StrLookup;
 
 import com.dotmarketing.util.Logger;
+
+import nl.isaac.comp.configuration.CustomConfiguration;
+import nl.isaac.comp.configuration.CustomConfigurationBuilder;
 
 /**
  * This class contains helper methods for creating {@link CustomConfiguration} objects with properties as specified for the ISAAC Configuration plugin.

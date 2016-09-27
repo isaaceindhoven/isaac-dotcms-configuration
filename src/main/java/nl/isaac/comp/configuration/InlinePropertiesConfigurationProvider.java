@@ -2,13 +2,11 @@ package nl.isaac.comp.configuration;
 
 import java.util.List;
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.AbstractConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationDeclaration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.PropertiesConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.ConfigurationNode;
-
-
+import org.apache.commons.configuration.AbstractConfiguration;
+import org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationDeclaration;
+import org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.tree.ConfigurationNode;
 
 /**
  * A specialized provider implementation that deals with inline property

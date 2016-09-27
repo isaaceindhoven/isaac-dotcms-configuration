@@ -13,10 +13,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nl.isaac.comp.configuration.CustomConfiguration;
-import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-
+import org.apache.commons.configuration.ConfigurationException;
 import org.apache.velocity.tools.view.tools.ViewTool;
 
 import com.dotcms.repackage.org.osgi.framework.Bundle;
@@ -26,6 +23,9 @@ import com.dotmarketing.exception.DotDataException;
 import com.dotmarketing.exception.DotSecurityException;
 import com.dotmarketing.osgi.OSGIProxyServlet;
 import com.dotmarketing.util.Logger;
+
+import nl.isaac.comp.configuration.CustomConfiguration;
+import nl.isaac.dotcms.plugin.configuration.ConfigurationService;
 
 /**
  * This viewtool provides several tools for use in the Configuration Admin page
@@ -116,4 +116,5 @@ public class ConfigurationAdminViewTool implements ViewTool {
 	@Override
 	public void init(Object arg0) {
 	}
+
 }

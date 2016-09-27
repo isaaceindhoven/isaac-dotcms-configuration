@@ -1,0 +1,3 @@
+Found default environment configuration:  #test($UtilMethods.isSet($pluginapitool.loadProperty('configuration', 'environment')))
+#set($nonExistingConfiguration = !$UtilMethods.isSet($pluginapitool.loadProperty('configuration', '123_non_existing_plugin_456')))
+Non existing configuration:  #test($nonExistingConfiguration)

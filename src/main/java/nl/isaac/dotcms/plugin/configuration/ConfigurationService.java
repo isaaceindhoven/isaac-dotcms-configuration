@@ -14,21 +14,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
+import org.apache.commons.configuration.FileConfiguration;
+import org.apache.commons.lang.text.StrLookup;
+
+import com.dotcms.repackage.org.osgi.framework.Bundle;
+import com.dotmarketing.osgi.OSGIProxyServlet;
+import com.dotmarketing.util.Logger;
+
 import nl.isaac.comp.configuration.CustomConfiguration;
 import nl.isaac.comp.configuration.types.EnvironmentType;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.FileConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.lang.text.StrLookup;
 import nl.isaac.dotcms.plugin.configuration.dotcms.DotCMSFileConfigurationProvider;
 import nl.isaac.dotcms.plugin.configuration.exception.ConfigurationNotFoundException;
 import nl.isaac.dotcms.plugin.configuration.listener.RequestStoringListener;
 import nl.isaac.dotcms.plugin.configuration.osgi.OSGiFileConfigurationProvider;
 import nl.isaac.dotcms.plugin.configuration.util.EmptyConfiguration;
-
-import com.dotcms.repackage.org.osgi.framework.Bundle;
-import com.dotmarketing.osgi.OSGIProxyServlet;
-import com.dotmarketing.util.Logger;
 
 /**
  * The class to retrieve your configurations from.
@@ -193,7 +194,7 @@ public class ConfigurationService {
 		if (ipAddress != null) {
 			ipAddress = ipAddress.replace(':', '_');
 		}
-
+		
 		if (cacheOnIp) {
 			String ipKey = basicKey + '_' + ipAddress + '_' + sessionId;
 			if (!ipForwardCache.contains(ipKey)) {

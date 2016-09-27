@@ -1,4 +1,8 @@
 package nl.isaac.dotcms.plugin.configuration.dotcms;
+
+import org.apache.commons.configuration.DefaultConfigurationBuilder.FileConfigurationProvider;
+import org.apache.commons.configuration.beanutils.BeanDeclaration;
+
 /**
 * dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed 
 * under a Creative Commons Attribution 3.0 Unported License
@@ -7,9 +11,6 @@ package nl.isaac.dotcms.plugin.configuration.dotcms;
 * 
 * @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
 */
-
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.FileConfigurationProvider;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.beanutils.BeanDeclaration;
 
 /**
  * A slightly augmented {@link FileConfigurationProvider}, it just defaults the bean class to {@link DotCMSFileConfiguration} and it sets a field on the instances created by this class.

@@ -10,9 +10,9 @@ package nl.isaac.dotcms.plugin.configuration.osgi;
 
 import java.net.URL;
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.PropertiesConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.XMLConfiguration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.XMLConfiguration;
 
 import com.dotcms.repackage.org.osgi.framework.Bundle;
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>nl.isaac.dotcms</groupId>
-	<artifactId>configuration</artifactId>
-	<version>3.2.1</version>
+	<groupId>nl.isaac.dotcms.plugin.configuration</groupId>
+	<artifactId>isaac-dotcms-configuration</artifactId>
+	<version>3.5</version>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -93,7 +93,19 @@
 		<dependency>
 			<groupId>com.dotcms</groupId>
 			<artifactId>dotcms</artifactId>
-			<version>3.2.4</version>
+			<version>3.5</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.dotcms.lib</groupId>
+			<artifactId>dot.commons-io</artifactId>
+			<version>2.0.1_1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -103,53 +115,52 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>isaac-configuration</artifactId>
-			<version>1.0.10-SNAPSHOT_dependency</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/dependencies/isaac-configuration-1.0.10-SNAPSHOT_dependency.jar</systemPath>
+			<groupId>com.dotcms.lib</groupId>
+			<artifactId>dot.commons-lang</artifactId>
+			<version>2.4_1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>com.dotcms.lib</groupId>
+			<artifactId>dot.felix</artifactId>
+			<version>4.2.1_1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.dotcms.lib</groupId>
+			<artifactId>dot.portlet</artifactId>
+			<version>1.0_1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.7.0_dependency</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/dependencies/commons-beanutils-1.7.0_dependency.jar</systemPath>
+			<version>1.7.0</version>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils-core</artifactId>
-			<version>1.8.0_dependency</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/dependencies/commons-beanutils-core-1.8.0_dependency.jar</systemPath>
+			<version>1.8.0</version>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>3.2.2_dependency</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/dependencies/commons-collections-3.2.2_dependency.jar</systemPath>
+			<version>3.2.2</version>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
-			<version>1.7_dependency</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/dependencies/commons-configuration-1.7_dependency.jar</systemPath>
+			<version>1.7</version>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-			<version>2.6_dependency</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/dependencies/commons-lang-2.6_dependency.jar</systemPath>
+			<version>2.6</version>
 		</dependency>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
+			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.1_dependency</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/dependencies/commons-logging-1.1.1_dependency.jar</systemPath>
+			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
 </project>

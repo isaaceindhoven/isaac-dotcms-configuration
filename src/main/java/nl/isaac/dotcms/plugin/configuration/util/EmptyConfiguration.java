@@ -8,8 +8,10 @@ package nl.isaac.dotcms.plugin.configuration.util;
 * @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
 */
 
+import org.apache.commons.configuration.CombinedConfiguration;
+
 import nl.isaac.comp.configuration.CustomConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.CombinedConfiguration;
+
 
 public class EmptyConfiguration extends CustomConfiguration{
 

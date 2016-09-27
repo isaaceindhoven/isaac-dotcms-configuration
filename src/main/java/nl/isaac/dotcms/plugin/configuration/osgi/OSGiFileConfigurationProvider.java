@@ -1,10 +1,11 @@
 package nl.isaac.dotcms.plugin.configuration.osgi;
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.DefaultConfigurationBuilder.FileConfigurationProvider;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.beanutils.BeanDeclaration;
-import nl.isaac.dotcms.plugin.configuration.dotcms.DotCMSFileConfiguration;
+import org.apache.commons.configuration.DefaultConfigurationBuilder.FileConfigurationProvider;
+import org.apache.commons.configuration.beanutils.BeanDeclaration;
 
 import com.dotcms.repackage.org.osgi.framework.Bundle;
+
+import nl.isaac.dotcms.plugin.configuration.dotcms.DotCMSFileConfiguration;
 
 
 public class OSGiFileConfigurationProvider extends FileConfigurationProvider {

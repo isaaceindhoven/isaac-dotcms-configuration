@@ -8,22 +8,21 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.AbstractConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.CombinedConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.Configuration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.HierarchicalConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.HierarchicalConfiguration.Node;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.SubnodeConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.event.ConfigurationErrorListener;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.event.ConfigurationEvent;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.event.ConfigurationListener;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.interpol.ConfigurationInterpolator;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.ConfigurationNode;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.ExpressionEngine;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.NodeCombiner;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.lang.text.StrSubstitutor;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.logging.Log;
-
+import org.apache.commons.configuration.AbstractConfiguration;
+import org.apache.commons.configuration.CombinedConfiguration;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.HierarchicalConfiguration;
+import org.apache.commons.configuration.HierarchicalConfiguration.Node;
+import org.apache.commons.configuration.SubnodeConfiguration;
+import org.apache.commons.configuration.event.ConfigurationErrorListener;
+import org.apache.commons.configuration.event.ConfigurationEvent;
+import org.apache.commons.configuration.event.ConfigurationListener;
+import org.apache.commons.configuration.interpol.ConfigurationInterpolator;
+import org.apache.commons.configuration.tree.ConfigurationNode;
+import org.apache.commons.configuration.tree.ExpressionEngine;
+import org.apache.commons.configuration.tree.NodeCombiner;
+import org.apache.commons.lang.text.StrSubstitutor;
+import org.apache.commons.logging.Log;
 
 /**
  * A wrapper class for {@link CombinedConfiguration}

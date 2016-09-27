@@ -8,9 +8,9 @@ package nl.isaac.dotcms.plugin.configuration.dotcms;
 * @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
 */
 
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.ConfigurationException;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.XMLConfiguration;
-import nl.isaac.dotcms.plugin.configuration.shared.FileTools;
+
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.XMLConfiguration;
 
 import com.dotmarketing.beans.Host;
 import com.dotmarketing.business.APILocator;
@@ -18,6 +18,8 @@ import com.dotmarketing.exception.DotDataException;
 import com.dotmarketing.exception.DotSecurityException;
 import com.dotmarketing.portlets.fileassets.business.FileAsset;
 import com.liferay.portal.model.User;
+
+import nl.isaac.dotcms.plugin.configuration.shared.FileTools;
 
 /**
  * This changes the default {@link XMLConfiguration#load()} to use DotCMS APIs to load a file managed by DotCMS.

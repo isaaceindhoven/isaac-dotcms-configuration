@@ -4,15 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.configuration.CombinedConfiguration;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.FileConfiguration;
+import org.apache.commons.configuration.HierarchicalConfiguration;
+import org.apache.commons.configuration.tree.ConfigurationNodeVisitor;
+
 import nl.isaac.comp.configuration.visitor.ToStringMultiLineVisitor;
 import nl.isaac.comp.configuration.visitor.ToStringSingleLineVisitor;
 import nl.isaac.comp.configuration.visitor.ToStringTreeVisitor;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.CombinedConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.Configuration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.FileConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.HierarchicalConfiguration;
-import nl.isaac.dotcms.plugin.configuration.dependencies.org.apache.commons.configuration.tree.ConfigurationNodeVisitor;
-
 
 
 /**
