@@ -19,14 +19,14 @@ import com.dotmarketing.util.VelocityUtil;
 
 public class MonitoringServlet extends HttpServlet {
 	private static final String testMacro = "#macro(test $boolean)#if($boolean) OK\n#else NOK\n#end#end\n";
-	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String velocity = getMonitoringVelocity();
 		ChainedContext velocityContext = getStrictVelocityContext(request, response);
-		
+
 		try {
 			String result = VelocityUtil.eval(velocity, velocityContext);
 			if(result.contains("$") || result.contains("NOK")) {
@@ -36,7 +36,7 @@ public class MonitoringServlet extends HttpServlet {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 	private ChainedContext getStrictVelocityContext(HttpServletRequest request,	HttpServletResponse response) {
@@ -50,7 +50,7 @@ public class MonitoringServlet extends HttpServlet {
 		ClassLoader classLoader = getClass().getClassLoader();
 		URL url = classLoader.getResource("");
 
-		// for example: /D:/java/dotcms_3.5/dotserver/tomcat-8.0.18/lib/
+		// for example: /D:/java/dotcms_3.7.1/dotserver/tomcat-8.0.18/lib/
 		String tomcatLibPath = url.getPath();
 		String configurationPluginPath = "";
 		String[] folders = tomcatLibPath.split("/");
@@ -79,5 +79,5 @@ public class MonitoringServlet extends HttpServlet {
 
 		return "/ext/monitoring.vtl does not exist";
 	}
-	
+
 }
