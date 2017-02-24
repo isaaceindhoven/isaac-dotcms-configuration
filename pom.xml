@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.isaac.dotcms.plugin.configuration</groupId>
 	<artifactId>isaac-dotcms-configuration</artifactId>
-	<version>3.5.0</version>
+	<version>3.7.1</version>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,7 +36,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
+				<version>3.6.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -45,7 +45,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.10</version>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
@@ -93,7 +93,7 @@
 		<dependency>
 			<groupId>com.dotcms</groupId>
 			<artifactId>dotcms</artifactId>
-			<version>3.5</version>
+			<version>3.7.1</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -105,7 +105,7 @@
 		<dependency>
 			<groupId>com.dotcms.lib</groupId>
 			<artifactId>dot.commons-io</artifactId>
-			<version>2.0.1_1</version>
+			<version>2.0.1_2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -117,30 +117,30 @@
 		<dependency>
 			<groupId>com.dotcms.lib</groupId>
 			<artifactId>dot.commons-lang</artifactId>
-			<version>2.4_1</version>
+			<version>2.4_2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.dotcms.lib</groupId>
 			<artifactId>dot.felix</artifactId>
-			<version>4.2.1_1</version>
+			<version>4.2.1_3</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.dotcms.lib</groupId>
 			<artifactId>dot.portlet</artifactId>
-			<version>1.0_1</version>
+			<version>1.0_2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>1.7.0</version>
+			<version>1.9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils-core</artifactId>
-			<version>1.8.0</version>
+			<version>1.8.3</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
@@ -150,7 +150,7 @@
 		<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
-			<version>1.7</version>
+			<version>1.10</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -160,7 +160,7 @@
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 </project>
