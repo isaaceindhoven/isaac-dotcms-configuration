@@ -2,3 +2,4 @@ Manifest-Version: 1.0
 Deploy-Class: 
 Plugin-Name: ${artifactId}
 Plugin-Version: ${version}
+Author: ISAAC
