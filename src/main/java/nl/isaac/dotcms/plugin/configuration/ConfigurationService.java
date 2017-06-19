@@ -1,10 +1,10 @@
 package nl.isaac.dotcms.plugin.configuration;
 /**
-* dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed 
+* dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed
 * under a Creative Commons Attribution 3.0 Unported License
 * - http://creativecommons.org/licenses/by/3.0/
 * - http://www.geekyplugins.com/
-* 
+*
 * @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
 */
 
@@ -18,8 +18,8 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.DefaultConfigurationBuilder.ConfigurationProvider;
 import org.apache.commons.configuration.FileConfiguration;
 import org.apache.commons.lang.text.StrLookup;
+import org.osgi.framework.Bundle;
 
-import com.dotcms.repackage.org.osgi.framework.Bundle;
 import com.dotmarketing.osgi.OSGIProxyServlet;
 import com.dotmarketing.util.Logger;
 
@@ -58,8 +58,8 @@ public class ConfigurationService {
 	private static final String locationConfigHosts = "${sys:catalina.home}/conf/applications/locationConfigHosts.xml";
 	private static final String locationConfigPlugins = "${sys:catalina.home}/conf/applications/locationConfigPlugins.xml";
 
-	private static final ConcurrentHashMap<String, CustomConfiguration> serverCache = new ConcurrentHashMap<String, CustomConfiguration>();
-	private static final Set<String> ipForwardCache = new HashSet<String>();
+	private static final ConcurrentHashMap<String, CustomConfiguration> serverCache = new ConcurrentHashMap<>();
+	private static final Set<String> ipForwardCache = new HashSet<>();
 
 	/**
 	 * The type of environment
@@ -194,7 +194,7 @@ public class ConfigurationService {
 		if (ipAddress != null) {
 			ipAddress = ipAddress.replace(':', '_');
 		}
-		
+
 		if (cacheOnIp) {
 			String ipKey = basicKey + '_' + ipAddress + '_' + sessionId;
 			if (!ipForwardCache.contains(ipKey)) {
@@ -215,17 +215,17 @@ public class ConfigurationService {
 
 		Logger.debug(ConfigurationService.class, "Loading configuration for key: " + key);
 
-		Map<String, String> interpolationValues = new HashMap<String, String>();
-		final Bundle bundle; 
+		Map<String, String> interpolationValues = new HashMap<>();
+		final Bundle bundle;
 
 		interpolationValues.put("hostName", hostName);
 		if (pluginName != null && pluginName.startsWith("osgi/")) {
 			//This is an OSGi plugin
 			String[] splitPluginName = pluginName.split("/");
 			interpolationValues.put("pluginName", splitPluginName[1]);
-			
+
 			if (splitPluginName.length > 2) {
-				long bundleId = Long.valueOf(splitPluginName[2]);	
+				long bundleId = Long.valueOf(splitPluginName[2]);
 				bundle = OSGIProxyServlet.bundleContext.getBundle(bundleId);
 			} else {
 				// If we didn't get a bundleId we need to search for it, somewhat slower, but the result is cached
@@ -243,13 +243,13 @@ public class ConfigurationService {
 			interpolationValues.put("ClientIPAddress", ipAddress);
 		}
 
-		Map<String, StrLookup> interpolators = new HashMap<String, StrLookup>();
+		Map<String, StrLookup> interpolators = new HashMap<>();
 		interpolators.put("param", StrLookup.mapLookup(interpolationValues));
 
 		DotCMSFileConfigurationProvider dotCmsProvider = new DotCMSFileConfigurationProvider(hostName);
-		Map<String, ConfigurationProvider> providers = new HashMap<String, ConfigurationProvider>();
+		Map<String, ConfigurationProvider> providers = new HashMap<>();
 		providers.put("dotcms", dotCmsProvider);
-		
+
 		OSGiFileConfigurationProvider osgiProvider = new OSGiFileConfigurationProvider(bundle);
 		providers.put("osgi", osgiProvider);
 
@@ -309,7 +309,7 @@ public class ConfigurationService {
 		void addConfigurationToSession(String key);
 	}
 
-	private static final ThreadLocal<ConfigurationParameters> defaultParameters = new ThreadLocal<ConfigurationParameters>();
+	private static final ThreadLocal<ConfigurationParameters> defaultParameters = new ThreadLocal<>();
 
 	/**
 	 * The hook for the outside system to deposit the default parameters
@@ -348,7 +348,7 @@ public class ConfigurationService {
 
 	/**
 	 * This determines the number of loaded configuration variants.
-	 * 
+	 *
 	 * @return
 	 */
 	public static int getNumberOfLoadedConfigurations() {

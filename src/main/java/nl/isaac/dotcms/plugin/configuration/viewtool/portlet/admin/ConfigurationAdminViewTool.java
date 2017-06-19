@@ -1,10 +1,10 @@
 package nl.isaac.dotcms.plugin.configuration.viewtool.portlet.admin;
 /**
-* dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed 
+* dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed
 * under a Creative Commons Attribution 3.0 Unported License
 * - http://creativecommons.org/licenses/by/3.0/
 * - http://www.geekyplugins.com/
-* 
+*
 * @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
 */
 
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.velocity.tools.view.tools.ViewTool;
+import org.osgi.framework.Bundle;
 
-import com.dotcms.repackage.org.osgi.framework.Bundle;
 import com.dotmarketing.beans.Host;
 import com.dotmarketing.business.APILocator;
 import com.dotmarketing.exception.DotDataException;
@@ -36,7 +36,7 @@ public class ConfigurationAdminViewTool implements ViewTool {
 
 	public List<String> getAllHosts() throws DotDataException, DotSecurityException {
 		List<Host> hosts = APILocator.getHostAPI().findAll(APILocator.getUserAPI().getSystemUser(), false);
-		List<String> hostNames = new ArrayList<String>(hosts.size());
+		List<String> hostNames = new ArrayList<>(hosts.size());
 		for (Host host : hosts) {
 			hostNames.add(host.getHostname());
 		}
@@ -45,13 +45,13 @@ public class ConfigurationAdminViewTool implements ViewTool {
 
 	public List<String> getAllPlugins(String hostName, HttpServletRequest request) {
 		List<String> plugins = APILocator.getPluginAPI().getDeployedPluginOrder();
-		List<String> pluginNames = new ArrayList<String>();
+		List<String> pluginNames = new ArrayList<>();
 		for (String pluginName : plugins) {
 			if (null != tryGetPluginConfiguration(hostName, pluginName, request)) {
 				pluginNames.add(pluginName);
 			}
 		}
-		
+
 		for(Bundle bundle: OSGIProxyServlet.bundleContext.getBundles()) {
 			String bundleName = bundle.getHeaders().get("Bundle-Name");
 			if(!bundleName.contains(" ")) {
@@ -106,7 +106,7 @@ public class ConfigurationAdminViewTool implements ViewTool {
 
 	/**
 	 * This determines the number of loaded configuration variants.
-	 * 
+	 *
 	 * @return
 	 */
 	public int getNumberOfLoadedConfigurations() {

@@ -1,41 +1,34 @@
 package com.dotmarketing.plugin.business;
-/**
-* dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed 
-* under a Creative Commons Attribution 3.0 Unported License
-* - http://creativecommons.org/licenses/by/3.0/
-* - http://www.geekyplugins.com/
-* 
-* @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
-*/
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+/**
+* dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed
+* under a Creative Commons Attribution 3.0 Unported License
+* - http://creativecommons.org/licenses/by/3.0/
+* - http://www.geekyplugins.com/
+*
+* @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
+*/
 import com.dotmarketing.beans.Host;
 import com.dotmarketing.beans.Identifier;
 import com.dotmarketing.business.APILocator;
 import com.dotmarketing.business.FactoryLocator;
-import com.dotmarketing.cache.LiveCache;
-import com.dotmarketing.cache.WorkingCache;
-import com.dotmarketing.db.HibernateUtil;
 import com.dotmarketing.exception.DotDataException;
-import com.dotmarketing.factories.PublishFactory;
 import com.dotmarketing.plugin.model.Plugin;
 import com.dotmarketing.plugin.model.PluginProperty;
 import com.dotmarketing.portlets.contentlet.business.HostAPI;
 import com.dotmarketing.portlets.contentlet.model.Contentlet;
 import com.dotmarketing.portlets.fileassets.business.FileAssetAPI;
-import com.dotmarketing.portlets.fileassets.business.IFileAsset;
 import com.dotmarketing.portlets.folders.model.Folder;
 import com.dotmarketing.util.InodeUtils;
 import com.dotmarketing.util.Logger;
@@ -61,10 +54,12 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#delete(com.dotmarketing.plugin.model.Plugin)
 	 */
+	@Override
 	public void delete(Plugin plugin) throws DotDataException {
 		pluginFac.delete(plugin);
 	}
 
+	@Override
 	public void deletePluginProperties(String pluginId) throws DotDataException {
 		pluginFac.deletePluginProperties(pluginId);
 	}
@@ -72,6 +67,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#loadPlugin(java.lang.String)
 	 */
+	@Override
 	public Plugin loadPlugin(String id) throws DotDataException {
 		return pluginFac.loadPlugin(id);
 	}
@@ -79,6 +75,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#loadPlugins()
 	 */
+	@Override
 	public List<Plugin> findPlugins() throws DotDataException {
 		return pluginFac.findPlugins();
 	}
@@ -86,6 +83,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#loadProperty(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public String loadProperty(String pluginId, String key)	throws DotDataException {
 		PluginProperty pp = pluginFac.loadProperty(pluginId, key);
 		if(pp!= null){
@@ -98,6 +96,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#save(com.dotmarketing.plugin.model.Plugin)
 	 */
+	@Override
 	public void save(Plugin plugin) throws DotDataException {
 		pluginFac.save(plugin);
 	}
@@ -105,6 +104,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#saveProperty(java.lang.String, java.lang.String, java.lang.String)
 	 */
+	@Override
 	public void saveProperty(String pluginId, String key, String value)	throws DotDataException {
 		PluginProperty pp = pluginFac.loadProperty(pluginId, key);
 		if(pp != null && UtilMethods.isSet(pp.getPluginId())){
@@ -121,75 +121,81 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	}
 
 	@Override
-	public List<String> loadPluginConfigKeys(final String pluginId) throws DotDataException {
-		final List<String> result = new ArrayList<String>();
+	public List<String> loadPluginConfigKeys(String pluginId) throws DotDataException {
+		List<String> result = new ArrayList<>();
 		try{
-			final JarFile jar = new JarFile(new File(pluginJarDir.getPath() + File.separator + "plugin-" + pluginId));
-			final JarEntry entry = jar.getJarEntry("conf/plugin-controller.properties");
-			final Properties props = new Properties();
-			final InputStream in = jar.getInputStream(entry);
+			JarFile jar = new JarFile(new File(pluginJarDir.getPath() + File.separator + "plugin-" + pluginId));
+			JarEntry entry = jar.getJarEntry("conf/plugin-controller.properties");
+			Properties props = new Properties();
+			InputStream in = jar.getInputStream(entry);
 			props.load(in);
-			final Enumeration<?> en = props.propertyNames();
+			Enumeration<?> en = props.propertyNames();
 			while (en.hasMoreElements()) {
-				final String key =  en.nextElement().toString().trim();
+				String key =  en.nextElement().toString().trim();
 				result.add(key);
 			}
 			return result;
-		}catch (final NullPointerException e){
+		}catch (NullPointerException e){
 			return result;
-		}catch (final Exception e) {
+		}catch (Exception e) {
 			Logger.error(this, e.getMessage(), e);
 			throw new DotDataException(e.getMessage(),e);
 		}
 	}
 
-	public String loadPluginConfigProperty(final String pluginId, final String key)	throws DotDataException {
+	@Override
+	public String loadPluginConfigProperty(String pluginId, String key)	throws DotDataException {
 		try{
-			final JarFile jar = new JarFile(new File(pluginJarDir.getPath() + File.separator + "plugin-" + pluginId + ".jar"));
-			final JarEntry entry = jar.getJarEntry("conf/plugin-controller.properties");
-			final Properties props = new Properties();
-			final InputStream in = jar.getInputStream(entry);
+			JarFile jar = new JarFile(new File(pluginJarDir.getPath() + File.separator + "plugin-" + pluginId + ".jar"));
+			JarEntry entry = jar.getJarEntry("conf/plugin-controller.properties");
+			Properties props = new Properties();
+			InputStream in = jar.getInputStream(entry);
 			props.load(in);
 			return props.get(key).toString();
-		}catch (final NullPointerException e){
+		}catch (NullPointerException e){
 			return "";
-		}catch (final Exception e) {
+		}catch (Exception e) {
 			Logger.error(this, e.getMessage(), e);
 			throw new DotDataException(e.getMessage(),e);
 		}
 	}
 
+	@Override
 	public List<String> getDeployedPluginOrder() {
 		return deployedPluginOrder;
 	}
 
+	@Override
 	public File getPluginJarDir() {
 		return pluginJarDir;
 	}
 
+	@Override
 	public void setDeployedPluginOrder(List<String> pluginIds) {
 		this.deployedPluginOrder = pluginIds;
 	}
 
+	@Override
 	public void setPluginJarDir(File directory) throws IOException {
 		if(!directory.exists()){
 			throw new IOException("The directory doesn't exist");
 		}
-		this.pluginJarDir = directory;		
+		this.pluginJarDir = directory;
 	}
 
+	@Override
 	public void loadBackEndFiles(String pluginId) throws IOException, DotDataException{
 		try{
-			
+
 			HostAPI hostAPI = APILocator.getHostAPI();
-			
+
 			User systemUser = APILocator.getUserAPI().getSystemUser();
 			JarFile jar = new JarFile(new File(pluginJarDir.getPath() + File.separator + "plugin-" + pluginId + ".jar"));
-			List<Host> hostList = new ArrayList<Host>();
+			List<Host> hostList = new ArrayList<>();
 
 			String hosts = loadPluginConfigProperty(pluginId, "hosts.name");
 			if(UtilMethods.isSet(hosts)){
-				for(String hostname : hosts.split(",")){	
+				for(String hostname : hosts.split(",")){
 					Host host = hostAPI.findByName(hostname, systemUser, false);
 					hostList.add(host);
 				}
@@ -214,7 +220,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 					String pluginFolderPath = "/plugins/"+pluginId;
 
 					Logger.debug(this,"files in dotcms:"+filePathAndName+"\n");
-					//Create temporary file with the inputstream to be used in the FileFactory
+					//Create temporary file with the inputstream
 					InputStream input = jar.getInputStream(entry);
 					File temporaryFile = new File("file.temp");
 					OutputStream output=new FileOutputStream(temporaryFile);
@@ -229,16 +235,15 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 					for(Host host : hostList){
 
 						Folder folder = APILocator.getFolderAPI().findFolderByPath(pluginFolderPath + "/" + filePath,host,APILocator.getUserAPI().getSystemUser(),false);
-						if( !InodeUtils.isSet(folder.getInode())){			
+						if( !InodeUtils.isSet(folder.getInode())){
 							folder = APILocator.getFolderAPI().createFolders(pluginFolderPath + "/" + filePath, host,APILocator.getUserAPI().getSystemUser(),false);
 						}
-						//GetPrevious version if exists 
-						IFileAsset currentFile = null;
+						//GetPrevious version if exists
 						Identifier currentId = APILocator.getIdentifierAPI().find(host, pluginFolderPath+"/"+filePathAndName);
 						if(currentId!=null && InodeUtils.isSet(currentId.getId()) && currentId.getAssetType().equals("contentlet")){
 							Contentlet cont = APILocator.getContentletAPI().findContentletByIdentifier(currentId.getId(), true, APILocator.getLanguageAPI().getDefaultLanguage().getId(), APILocator.getUserAPI().getSystemUser(),false);
 							if(cont!=null && InodeUtils.isSet(cont.getInode())){
-								currentFile = APILocator.getFileAssetAPI().fromContentlet(cont);
+								APILocator.getFileAssetAPI().fromContentlet(cont);
 								cont.setStringProperty(FileAssetAPI.TITLE_FIELD, UtilMethods.getFileName(fileName));
 								cont.setFolder(folder.getInode());
 								cont.setHost(host.getIdentifier());
@@ -246,63 +251,8 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 								APILocator.getContentletAPI().checkin(cont, APILocator.getUserAPI().getSystemUser(),false);
 								APILocator.getVersionableAPI().setWorking(cont);
 								APILocator.getVersionableAPI().setLive(cont);
-								if (cont.isLive()){
-									LiveCache.removeAssetFromCache(cont);
-									LiveCache.addToLiveAssetToCache(cont);
-								}else{
-									LiveCache.removeAssetFromCache(cont);
-									LiveCache.addToLiveAssetToCache(cont);
-								}
-								WorkingCache.removeAssetFromCache(cont);
-								WorkingCache.addToWorkingAssetToCache(cont);
-							}
-						}else if(currentId!=null && InodeUtils.isSet(currentId.getId())){
-							currentFile = APILocator.getFileAPI().getFileByURI(pluginFolderPath+"/"+filePathAndName, host, true, APILocator.getUserAPI().getSystemUser(),false);
-							com.dotmarketing.portlets.files.model.File file = new com.dotmarketing.portlets.files.model.File();
-							file.setFileName(fileName);
-							file.setFriendlyName(UtilMethods.getFileName(fileName));
-							file.setTitle(UtilMethods.getFileName(fileName));
-							file.setMimeType(APILocator.getFileAPI().getMimeType(fileName));
-							file.setOwner(systemUser.getUserId());
-							file.setModUser(systemUser.getUserId());
-							file.setModDate(new Date());
-							file.setParent(folder.getIdentifier());
-							file.setSize((int)temporaryFile.length());
-							
-							HibernateUtil.saveOrUpdate(file);
-							APILocator.getFileAPI().invalidateCache(file);
-							// get the file Identifier
-							Identifier ident = null;
-							if (InodeUtils.isSet(currentFile.getInode())){
-								ident = APILocator.getIdentifierAPI().find((com.dotmarketing.portlets.files.model.File)currentFile);
-								APILocator.getFileAPI().invalidateCache((com.dotmarketing.portlets.files.model.File)currentFile);
-							}else{
-								ident = new Identifier();
-							}
-							//Saving the file, this creates the new version and save the new data
-							com.dotmarketing.portlets.files.model.File workingFile = null;
-							workingFile = APILocator.getFileAPI().saveFile(file, temporaryFile, folder, systemUser, false);
-							
-							APILocator.getVersionableAPI().setWorking(workingFile);
-							APILocator.getVersionableAPI().setLive(workingFile);
 
-							APILocator.getFileAPI().invalidateCache(workingFile);
-							ident = APILocator.getIdentifierAPI().find(workingFile);
-
-							//updating caches
-							if (workingFile.isLive()){
-								LiveCache.removeAssetFromCache(workingFile);
-								LiveCache.addToLiveAssetToCache(workingFile);
-							}else{
-								LiveCache.removeAssetFromCache(file);
-								LiveCache.addToLiveAssetToCache(file);
 							}
-							WorkingCache.removeAssetFromCache(workingFile);
-							WorkingCache.addToWorkingAssetToCache(workingFile);
-							
-							//Publish the File
-							PublishFactory.publishAsset(workingFile, systemUser, false);
-
 						}else{
 							Contentlet cont = new Contentlet();
 							cont.setStructureInode(folder.getDefaultFileType());
@@ -313,17 +263,9 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 							APILocator.getContentletAPI().checkin(cont, APILocator.getUserAPI().getSystemUser(),false);
 							APILocator.getVersionableAPI().setWorking(cont);
 							APILocator.getVersionableAPI().setLive(cont);
-							if (cont.isLive()){
-								LiveCache.removeAssetFromCache(cont);
-								LiveCache.addToLiveAssetToCache(cont);
-							}else{
-								LiveCache.removeAssetFromCache(cont);
-								LiveCache.addToLiveAssetToCache(cont);
-							}
-							WorkingCache.removeAssetFromCache(cont);
-							WorkingCache.addToWorkingAssetToCache(cont);
+
 						}
-			
+
 
 					}
 

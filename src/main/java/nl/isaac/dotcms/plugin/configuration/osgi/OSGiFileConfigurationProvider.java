@@ -2,14 +2,13 @@ package nl.isaac.dotcms.plugin.configuration.osgi;
 
 import org.apache.commons.configuration.DefaultConfigurationBuilder.FileConfigurationProvider;
 import org.apache.commons.configuration.beanutils.BeanDeclaration;
-
-import com.dotcms.repackage.org.osgi.framework.Bundle;
+import org.osgi.framework.Bundle;
 
 import nl.isaac.dotcms.plugin.configuration.dotcms.DotCMSFileConfiguration;
 
 
 public class OSGiFileConfigurationProvider extends FileConfigurationProvider {
-	
+
 	private final Bundle bundle;
 
 	public OSGiFileConfigurationProvider(Bundle bundle) {
