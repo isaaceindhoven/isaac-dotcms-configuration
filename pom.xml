@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.isaac.dotcms.plugin.configuration</groupId>
 	<artifactId>isaac-dotcms-configuration</artifactId>
-	<version>4.1.0</version>
+	<version>4.1.1</version>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -93,7 +93,7 @@
 		<dependency>
 			<groupId>com.dotcms</groupId>
 			<artifactId>dotcms</artifactId>
-			<version>4.1.0</version>
+			<version>4.1.1</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
