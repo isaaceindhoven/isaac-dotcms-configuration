@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>nl.isaac.dotcms.plugin.configuration</groupId>
 	<artifactId>isaac-dotcms-configuration</artifactId>
-	<version>4.1.1-1</version>
+	<version>4.2.1-1</version>
 	<packaging>jar</packaging>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
 	<prerequisites>
 		<maven>3.0</maven>
 	</prerequisites>
+
 	<organization>
 		<name>ISAAC Software Solutions</name>
 		<url>http://www.isaac.nl</url>
 	</organization>
+
 	<repositories>
 		<repository>
 			<id>dotcms</id>
@@ -29,6 +35,7 @@
 			</snapshots>
 		</repository>
 	</repositories>
+
 	<build>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<testSourceDirectory>${basedir}/test</testSourceDirectory>
@@ -36,16 +43,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.1</version>
+				<version>3.7.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>3.0.2</version>
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
@@ -64,6 +72,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
@@ -89,11 +98,12 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.dotcms</groupId>
 			<artifactId>dotcms</artifactId>
-			<version>4.1.1</version>
+			<version>4.2.1</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -110,8 +120,8 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
