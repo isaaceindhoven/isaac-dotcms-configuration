@@ -11,7 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<project.dotcms.version>5.0.2</project.dotcms.version>
+		<project.dotcms.version>5.1.1</project.dotcms.version>
 	</properties>
 
 	<prerequisites>

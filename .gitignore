@@ -1,6 +1,8 @@
 **/.settings/*
 **/node_modules/*
 **/target/*
+**/*.iml
+.idea/
 .classpath
 .factorypath
 .project
