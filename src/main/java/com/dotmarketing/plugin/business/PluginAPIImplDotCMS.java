@@ -1,24 +1,10 @@
-package com.dotmarketing.plugin.business;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Properties;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
-
 /**
-* dotCMS Configuration plugin by ISAAC - The Full Service Internet Agency is licensed
-* under a Creative Commons Attribution 3.0 Unported License
-* - http://creativecommons.org/licenses/by/3.0/
-* - http://www.geekyplugins.com/
-*
-* @copyright Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
-*/
+ *
+ */
+package com.dotmarketing.plugin.business;
+
+import com.dotcms.business.CloseDBIfOpened;
+import com.dotcms.business.WrapInTransaction;
 import com.dotmarketing.beans.Host;
 import com.dotmarketing.beans.Identifier;
 import com.dotmarketing.business.APILocator;
@@ -34,6 +20,17 @@ import com.dotmarketing.util.InodeUtils;
 import com.dotmarketing.util.Logger;
 import com.dotmarketing.util.UtilMethods;
 import com.liferay.portal.model.User;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Properties;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * @author Jason Tesser
@@ -54,12 +51,12 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#delete(com.dotmarketing.plugin.model.Plugin)
 	 */
-	@Override
+	@WrapInTransaction
 	public void delete(Plugin plugin) throws DotDataException {
 		pluginFac.delete(plugin);
 	}
 
-	@Override
+	@WrapInTransaction
 	public void deletePluginProperties(String pluginId) throws DotDataException {
 		pluginFac.deletePluginProperties(pluginId);
 	}
@@ -67,7 +64,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#loadPlugin(java.lang.String)
 	 */
-	@Override
+	@CloseDBIfOpened
 	public Plugin loadPlugin(String id) throws DotDataException {
 		return pluginFac.loadPlugin(id);
 	}
@@ -75,7 +72,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#loadPlugins()
 	 */
-	@Override
+	@CloseDBIfOpened
 	public List<Plugin> findPlugins() throws DotDataException {
 		return pluginFac.findPlugins();
 	}
@@ -83,7 +80,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#loadProperty(java.lang.String, java.lang.String)
 	 */
-	@Override
+	@CloseDBIfOpened
 	public String loadProperty(String pluginId, String key)	throws DotDataException {
 		PluginProperty pp = pluginFac.loadProperty(pluginId, key);
 		if(pp!= null){
@@ -96,7 +93,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#save(com.dotmarketing.plugin.model.Plugin)
 	 */
-	@Override
+	@WrapInTransaction
 	public void save(Plugin plugin) throws DotDataException {
 		pluginFac.save(plugin);
 	}
@@ -104,7 +101,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 	/* (non-Javadoc)
 	 * @see com.dotmarketing.plugin.business.PluginAPI#saveProperty(java.lang.String, java.lang.String, java.lang.String)
 	 */
-	@Override
+	@WrapInTransaction
 	public void saveProperty(String pluginId, String key, String value)	throws DotDataException {
 		PluginProperty pp = pluginFac.loadProperty(pluginId, key);
 		if(pp != null && UtilMethods.isSet(pp.getPluginId())){
@@ -120,9 +117,8 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 		pluginFac.saveProperty(pp);
 	}
 
-	@Override
 	public List<String> loadPluginConfigKeys(String pluginId) throws DotDataException {
-		List<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<String>();
 		try{
 			JarFile jar = new JarFile(new File(pluginJarDir.getPath() + File.separator + "plugin-" + pluginId));
 			JarEntry entry = jar.getJarEntry("conf/plugin-controller.properties");
@@ -143,7 +139,6 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 		}
 	}
 
-	@Override
 	public String loadPluginConfigProperty(String pluginId, String key)	throws DotDataException {
 		try{
 			JarFile jar = new JarFile(new File(pluginJarDir.getPath() + File.separator + "plugin-" + pluginId + ".jar"));
@@ -160,22 +155,18 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 		}
 	}
 
-	@Override
 	public List<String> getDeployedPluginOrder() {
 		return deployedPluginOrder;
 	}
 
-	@Override
 	public File getPluginJarDir() {
 		return pluginJarDir;
 	}
 
-	@Override
 	public void setDeployedPluginOrder(List<String> pluginIds) {
 		this.deployedPluginOrder = pluginIds;
 	}
 
-	@Override
 	public void setPluginJarDir(File directory) throws IOException {
 		if(!directory.exists()){
 			throw new IOException("The directory doesn't exist");
@@ -183,7 +174,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 		this.pluginJarDir = directory;
 	}
 
-	@Override
+	@CloseDBIfOpened
 	public void loadBackEndFiles(String pluginId) throws IOException, DotDataException{
 		try{
 
@@ -191,7 +182,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 
 			User systemUser = APILocator.getUserAPI().getSystemUser();
 			JarFile jar = new JarFile(new File(pluginJarDir.getPath() + File.separator + "plugin-" + pluginId + ".jar"));
-			List<Host> hostList = new ArrayList<>();
+			List<Host> hostList = new ArrayList<Host>();
 
 			String hosts = loadPluginConfigProperty(pluginId, "hosts.name");
 			if(UtilMethods.isSet(hosts)){
@@ -223,7 +214,7 @@ public class PluginAPIImplDotCMS implements PluginAPI {
 					//Create temporary file with the inputstream
 					InputStream input = jar.getInputStream(entry);
 					File temporaryFile = new File("file.temp");
-					OutputStream output=new FileOutputStream(temporaryFile);
+					final OutputStream output= Files.newOutputStream(temporaryFile.toPath());
 					byte buf[]=new byte[1024];
 					int len;
 					while((len=input.read(buf))>0){
