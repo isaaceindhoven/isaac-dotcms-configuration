@@ -138,8 +138,7 @@ public class ConfigurationService {
 		if (params != null) {
 			return retrieveFromCacheOrCreateConfiguration(keyPrefix, params.getHostName(), params.getIpAddress(), params.getSessionId(), pluginName, configurationLocation);
 		} else {
-			Logger.warn(ConfigurationService.class, "The default configuration has not been set, therefore you cannot use this method.");
-//			throw new ConfigurationNotFoundException("The default configuration has not been set, therefore you cannot use this method.");
+			Logger.warn(ConfigurationService.class, "The default configuration has not been set, therefore you cannot use this method. KeyPrefix=" + keyPrefix + " and plugin=" + pluginName);
 			return retrieveFromCacheOrCreateConfiguration(keyPrefix, null, null, null, pluginName, configurationLocation);
 		}
 	}
