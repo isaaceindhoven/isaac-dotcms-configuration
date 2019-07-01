@@ -96,7 +96,7 @@
 							<td>$pluginName</td>
 							<td>
 								<div>
-									<pre>${configurationAdmin.printConfiguration($pluginConfiguration)}</pre>
+									<pre>$!{esc.html(${configurationAdmin.printConfiguration($pluginConfiguration)})}</pre>
 							</td>
 						</tr>
 							#end
