@@ -5,13 +5,12 @@
 
 	<groupId>nl.isaac.dotcms.plugin.configuration</groupId>
 	<artifactId>isaac-dotcms-configuration</artifactId>
-	<version>${project.dotcms.version}-1</version>
+	<version>5.2.6-1</version>
 	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<project.dotcms.version>5.1.6</project.dotcms.version>
 	</properties>
 
 	<prerequisites>
@@ -104,7 +103,7 @@
 		<dependency>
 			<groupId>com.dotcms</groupId>
 			<artifactId>dotcms</artifactId>
-			<version>${project.dotcms.version}</version>
+			<version>5.2.6</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
