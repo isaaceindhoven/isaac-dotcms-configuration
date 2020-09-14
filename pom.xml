@@ -5,7 +5,7 @@
 
 	<groupId>nl.isaac.dotcms.plugin.configuration</groupId>
 	<artifactId>isaac-dotcms-configuration</artifactId>
-	<version>5.2.8-1</version>
+	<version>5.3.7-1</version>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -103,7 +103,7 @@
 		<dependency>
 			<groupId>com.dotcms</groupId>
 			<artifactId>dotcms</artifactId>
-			<version>5.2.8</version>
+			<version>5.3.7</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
