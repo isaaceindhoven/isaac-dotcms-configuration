@@ -103,11 +103,7 @@
 		<dependency>
 			<groupId>com.dotcms</groupId>
 			<artifactId>dotcms</artifactId>
-<<<<<<< HEAD
-			<version>5.3.8</version>
-=======
 			<version>5.3.8.4</version>
->>>>>>> 2979545 (Update for 5.3.8.4)
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
