@@ -19,8 +19,8 @@ import org.apache.commons.configuration.DefaultConfigurationBuilder.Configuratio
 import org.apache.commons.configuration.FileConfiguration;
 import org.apache.commons.lang.text.StrLookup;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
-import com.dotmarketing.osgi.OSGIProxyServlet;
 import com.dotmarketing.util.Logger;
 
 import nl.isaac.comp.configuration.CustomConfiguration;
@@ -225,7 +225,7 @@ public class ConfigurationService {
 
 			if (splitPluginName.length > 2) {
 				long bundleId = Long.valueOf(splitPluginName[2]);
-				bundle = OSGIProxyServlet.bundleContext.getBundle(bundleId);
+				bundle = FrameworkUtil.getBundle(ConfigurationService.class).getBundleContext().getBundle(bundleId);
 			} else {
 				// If we didn't get a bundleId we need to search for it, somewhat slower, but the result is cached
 				bundle = searchBundles(splitPluginName[1]);
@@ -286,7 +286,7 @@ public class ConfigurationService {
 		return conf;
 	}
 	private static Bundle searchBundles(String pluginName) {
-		for (Bundle bundle : OSGIProxyServlet.bundleContext.getBundles()) {
+		for (Bundle bundle : FrameworkUtil.getBundle(ConfigurationService.class).getBundleContext().getBundles()) {
 			if (pluginName.equals(bundle.getHeaders().get("Bundle-Name"))) {
 				return bundle;
 			}

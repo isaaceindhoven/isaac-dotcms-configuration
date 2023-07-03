@@ -16,12 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.velocity.tools.view.tools.ViewTool;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 import com.dotmarketing.beans.Host;
 import com.dotmarketing.business.APILocator;
 import com.dotmarketing.exception.DotDataException;
 import com.dotmarketing.exception.DotSecurityException;
-import com.dotmarketing.osgi.OSGIProxyServlet;
 import com.dotmarketing.util.Logger;
 
 import nl.isaac.comp.configuration.CustomConfiguration;
@@ -52,7 +52,7 @@ public class ConfigurationAdminViewTool implements ViewTool {
 			}
 		}
 
-		for(Bundle bundle: OSGIProxyServlet.bundleContext.getBundles()) {
+		for(Bundle bundle: FrameworkUtil.getBundle(getClass()).getBundleContext().getBundles()) {
 			String bundleName = bundle.getHeaders().get("Bundle-Name");
 			if(!bundleName.contains(" ")) {
 				//Do not show dotCMS' own plugins like "Apache Felix Bundle Repository" etc
