@@ -14,9 +14,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.felix.framework.OSGIUtil;
 import org.apache.velocity.tools.view.tools.ViewTool;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 import com.dotmarketing.beans.Host;
 import com.dotmarketing.business.APILocator;
@@ -45,6 +45,7 @@ public class ConfigurationAdminViewTool implements ViewTool {
 
 	public List<String> getAllPlugins(String hostName, HttpServletRequest request) {
 		List<String> plugins = APILocator.getPluginAPI().getDeployedPluginOrder();
+
 		List<String> pluginNames = new ArrayList<>();
 		for (String pluginName : plugins) {
 			if (null != tryGetPluginConfiguration(hostName, pluginName, request)) {
@@ -52,7 +53,7 @@ public class ConfigurationAdminViewTool implements ViewTool {
 			}
 		}
 
-		for(Bundle bundle: FrameworkUtil.getBundle(getClass()).getBundleContext().getBundles()) {
+		for(Bundle bundle: OSGIUtil.getInstance().getBundles()) {
 			String bundleName = bundle.getHeaders().get("Bundle-Name");
 			if(!bundleName.contains(" ")) {
 				//Do not show dotCMS' own plugins like "Apache Felix Bundle Repository" etc

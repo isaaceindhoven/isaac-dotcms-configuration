@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.tools.view.context.ChainedContext;
 
-import com.dotcms.repackage.org.apache.commons.io.IOUtils;
 import com.dotmarketing.util.VelocityUtil;
 
 public class MonitoringServlet extends HttpServlet {
